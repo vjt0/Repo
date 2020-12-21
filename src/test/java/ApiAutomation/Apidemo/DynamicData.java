@@ -18,6 +18,7 @@ public class DynamicData {
 		System.out.println(response);
 		JsonPath js= new JsonPath(response);
 		String Actualvalue=js.getString("location.latitude");
+		System.out.println(js.getString("accuracy"));
 		String Expected ="-";
 		System.out.println("Latitide is:  "+js.getString("location.latitude"));
 		Assert.assertEquals(Actualvalue, Expected);

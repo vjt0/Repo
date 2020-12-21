@@ -1,32 +1,54 @@
 package ApiAutomation.Apidemo;
 
+import static io.restassured.RestAssured.given;
+
+import java.time.Duration;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import io.restassured.RestAssured;
 import io.restassured.path.json.JsonPath;
 
 public class Assertions {
 
 	@Test
-	public void get_course() {
-	String response=	Testap1.dummy_json();
-	JsonPath js = new JsonPath(response);
-	System.out.println("The total number is:           "+js.getInt("courses.size()"));
-	System.out.println("The total purchase amount is:  "+js.getString("dashboard.purchaseAmount"));
-	System.out.println("The Title of first course is:  "+js.getString("courses[0].title"));
-	int total_amount=0;
-	for(int i=0;i<3;i++) {
-	String course_name=js.getString("courses["+i+"].title");
-	if(course_name.equalsIgnoreCase("RPA")) {
-		System.out.println("The no of copies sold by RPA are:  "+js.getInt("courses["+i+"].copies"));
-	}
-	int course_price=js.getInt("courses["+i+"].price");
-	int no_copies =js.getInt("courses["+i+"].copies");
-	System.out.println("The course name is:  "+course_name+"  !! Price:  "+course_price);
+	public void run() {
+		DesiredCapabilities caps=DesiredCapabilities.chrome();
+		caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
+		System.setProperty("webdriver.chrome.driver","C:\\Users\\52039252\\Desktop\\chromedriver.exe");	
+		
+	WebDriver driver=new ChromeDriver(caps);
 	
-	total_amount=total_amount+(course_price*no_copies);
-	}
-	System.out.println("The Total amount is :   "+total_amount);
-	int expected_amt=js.getInt("dashboard.purchaseAmount");
-	Assert.assertEquals(total_amount, expected_amt);
-}}
+	
+	//Wait wait1=new FluentWait(driver).withTimeout(Duration.ofSeconds(24)).pollingEvery(Duration.ofSeconds(5)).ignoring(Exception.class);
+	driver.manage().window().maximize();
+	driver.manage().deleteAllCookies();
+	driver.get("https://facebook.com");
+	//driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+	Actions action =new Actions(driver);
+	action.contextClick(driver.findElement(By.xpath("//body/div[@id='u_0_2']/div[@id='globalContainer']/div[@id='content']/div[1]/div[1]/img[1]"))).build().perform();
+	//driver.findElement(By.xpath("//input[@id='email']")).sendKeys("9717950731" + Keys.TAB);
+	
+	
+  // driver.switchTo().activeElement().sendKeys("Deadpool@42" + Keys.TAB);
+   //driver.switchTo().activeElement().sendKeys(Keys.ENTER);
+      //driver.findElement(By.xpath("")).click();
+
+      // Enter text "q" and perform keyboard action "Enter"
+      
+    
+  }}
+	
