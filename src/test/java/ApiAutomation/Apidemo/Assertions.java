@@ -26,7 +26,7 @@ public class Assertions {
 
 	@Test
 	public void run() {
-		DesiredCapabilities caps=DesiredCapabilities.chrome();
+		DesiredCapabilities caps=DesiredCapabilities.htmlUnit();
 		caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS,true);
 		System.setProperty("webdriver.chrome.driver","C:\\Users\\52039252\\Desktop\\chromedriver.exe");	
 		

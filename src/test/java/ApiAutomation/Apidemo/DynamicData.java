@@ -23,6 +23,7 @@ public class DynamicData {
 		System.out.println("Latitide is:  "+js.getString("location.latitude"));
 		Assert.assertEquals(Actualvalue, Expected);
         System.out.println("PASSED");
+        
 	    
 	}
 
@@ -38,3 +39,4 @@ public class DynamicData {
 	}
 
 }
+ 
